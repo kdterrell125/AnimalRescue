@@ -33,7 +33,8 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'shelters': formatted_shelters
+            'shelters': formatted_shelters,
+            'total_shelters': len(formatted_shelters)
         }), 200
 
     # Get animals
