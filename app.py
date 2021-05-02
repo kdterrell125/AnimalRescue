@@ -45,7 +45,8 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'animals': formatted_animals
+            'animals': formatted_animals,
+            'total_animals': len(formatted_animals)
         }), 200
 
     # Get all animals by shelter
