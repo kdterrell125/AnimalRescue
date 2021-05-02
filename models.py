@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv('.env')
 
-database_path = os.environ['DATABASE_URL']
-# database_path = 'postgresql://postgres:kandis@localhost:5432/animalrescue'
+#database_path = os.environ.get('DATABASE_URL')
+database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
 
 db = SQLAlchemy()
 
@@ -20,8 +22,8 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
-    migrate = Migrate(app, db)
     db.init_app(app)
+    migrate = Migrate(app, db)
 
 
 def db_drop_and_create_all():
