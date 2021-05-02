@@ -4,8 +4,8 @@ from flask_migrate import Migrate
 import json
 import os
 
-#database_path = os.environ['DATABASE_URL']
-database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
+database_path = os.environ['DATABASE_URL']
+#database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
 
 db = SQLAlchemy()
 
