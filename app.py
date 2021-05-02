@@ -114,6 +114,7 @@ def create_app(test_config=None):
             city = data.get('city')
             state = data.get('state')
             address = data.get('address')
+            phone = data.get('phone')
 
             if ((name == '') or (city == '') or
                     (state == '') or (address =='')):
@@ -123,7 +124,8 @@ def create_app(test_config=None):
                 name=name,
                 city=city,
                 state=state,
-                address=address
+                address=address,
+                phone=phone
             )
             shelter.insert()
         except BaseException as e:
@@ -190,6 +192,7 @@ def create_app(test_config=None):
             update_city = data.get('city', None)
             update_state = data.get('state', None)
             update_address = data.get('address', None)
+            update_phone = data.get('phone', None)
 
             if update_name:
                 updated_shelter.name = update_name
@@ -199,6 +202,8 @@ def create_app(test_config=None):
                 updated_shelter.state = update_state
             if update_address:
                 updated_shelter.address = update_address
+            if update_phone:
+                updated_shelter.phone = update_phone
 
             updated_shelter.update()
         except BaseException as e:

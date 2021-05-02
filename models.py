@@ -5,7 +5,7 @@ import json
 import os
 
 database_path = os.environ['DATABASE_URL']
-#database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
+# database_path = 'postgresql://postgres:kandis@localhost:5432/animalrescue'
 
 db = SQLAlchemy()
 
@@ -43,12 +43,14 @@ class Shelter(db.Model):
     city = Column(String)
     state = Column(String)
     address = Column(String)
+    phone = Column(String)
 
-    def __init__(self, name, city, state, address):
+    def __init__(self, name, city, state, address, phone):
         self.name = name
         self.city = city
         self.state = state
         self.address = address
+        self.phone = phone
 
     def format(self):
         return {
@@ -56,7 +58,8 @@ class Shelter(db.Model):
           'name': self.name,
           'city': self.city,
           'state': self.state,
-          'address': self.address
+          'address': self.address,
+          'phone': self.phone
         }
 
     def insert(self):

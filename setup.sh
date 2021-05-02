@@ -1,4 +1,4 @@
-export DATABASE_URL='postgres://movemtshxspxpr:a0843fe1ef90ada3da45dc278cf4c57051fbc4c264d0b1d8c6c8fc1948dc4b63@ec2-107-22-83-3.compute-1.amazonaws.com:5432/d8864d33bor4mm
+export DATABASE_URL='postgres://coqiueowztbhha:32cc37d2d367b1e85588ff1e2675aa3dd18b4d89951c6f8c3986842f8ad26df3@ec2-54-224-120-186.compute-1.amazonaws.com:5432/d5ha0safp2m9pe
 '
 export AUTH0_CLIENT_ID='gwGKpfoZpPLAOiHZs1LUAhxlGbLlHOju'
 export AUTH0_DOMAIN='kdterrell-udacity.us.auth0.com'
