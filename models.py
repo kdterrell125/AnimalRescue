@@ -6,8 +6,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv('.env')
 
-#database_path = os.environ.get('DATABASE_URL')
-database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
+database_path = os.environ.get('DATABASE_URL')
+#database_path = 'postgresql://postgres:kandis@localhost:5432/capstone'
 
 db = SQLAlchemy()
 
