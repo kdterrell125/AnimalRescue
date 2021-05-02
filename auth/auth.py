@@ -8,7 +8,7 @@ from urllib.request import urlopen
 from os import environ
 
 
-AUTH0_DOMAIN = 'kdterrell-udacity.us.auth0.com'#os.getenv('AUTH0_DOMAIN')
+AUTH0_DOMAIN = 'kdterrell-udacity.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'capstone'
 

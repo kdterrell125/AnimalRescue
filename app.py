@@ -15,26 +15,20 @@ def create_app(test_config=None):
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 
-    # @app.after_request
-    # def after_request(response):
-    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,
-    #                           Authorization,true')
-    #     response.headers.add('Access-Control-Allow-methods','GET, POST,
-    #                           PATCH, DELETE, OPTIONS')
-    #     return response
 
+    # Endpoints #
+
+    # After Auth0 login
     @app.route('/')
     def health():
         return jsonify({
-            'health': 'Running!'
+            'Greetings!': "Let's clear out the shelters!"
         }), 200
 
+    # Get shelters
     @app.route('/shelters', methods=['GET'])
     def get_shelters():
         shelters = Shelter.query.all()
-        # formatted_shelters ={}
-        # for shelter in shelters:
-        #     formatted_shelters[shelter.id] = shelter.id
         formatted_shelters = [shelter.format() for shelter in shelters]
 
         return jsonify({
@@ -42,6 +36,7 @@ def create_app(test_config=None):
             'shelters': formatted_shelters
         }), 200
 
+    # Get animals
     @app.route('/animals', methods=['GET'])
     def get_movies():
         animals = Animal.query.all()
@@ -52,6 +47,7 @@ def create_app(test_config=None):
             'animals': formatted_animals
         }), 200
 
+    # Get all animals by shelter
     @app.route('/shelters/<int:shelter_id>/animals', methods=['GET'])
     def get_specific_shelter_animals(shelter_id):
         shelter = Shelter.query.get(shelter_id)
@@ -71,6 +67,7 @@ def create_app(test_config=None):
             'current_shelter': shelter_id
         }), 200
 
+    # Delete shelter - Domain Admin 
     @app.route('/shelters/<int:shelter_id>', methods=['DELETE'])
     @requires_auth('delete:shelters')
     def delete_shelter(payload, shelter_id):
@@ -87,6 +84,7 @@ def create_app(test_config=None):
             'deleted': shelter_id
         }), 200
 
+    # Delete animal - Domain Admin/Shelter Manager
     @app.route('/animals/<int:animal_id>', methods=['DELETE'])
     @requires_auth('delete:animals')
     def delete_animal(payload, animal_id):
@@ -103,6 +101,7 @@ def create_app(test_config=None):
             'deleted': animal_id
         }), 200
 
+    # Create shelter - Domain Admin
     @app.route('/shelters', methods=['POST'])
     @requires_auth('post:shelters')
     def post_shelter(payload):
@@ -139,6 +138,7 @@ def create_app(test_config=None):
             'shelters': formatted_shelters
         }), 200
 
+    # Create animal - Domain Admin/Shelter Manager
     @app.route('/animals', methods=['POST'])
     @requires_auth('post:animals')
     def post_animal(payload):
@@ -177,6 +177,7 @@ def create_app(test_config=None):
             'animals': formatted_animals
         }), 200
 
+    # Update shelter - Domain Admin/Shelter Manager
     @app.route('/shelters/<int:shelter_id>', methods=['PATCH'])
     @requires_auth('patch:shelters')
     def update_shelter(payload, shelter_id):
@@ -217,6 +218,7 @@ def create_app(test_config=None):
             'shelters': formatted_shelters
             }), 200
 
+    # Update animal - Domain Admin/Animal Specialist
     @app.route('/animals/<int:animal_id>', methods=['PATCH'])
     @requires_auth('patch:animals')
     def update_animal(payload, animal_id):
@@ -260,6 +262,7 @@ def create_app(test_config=None):
             'animals': formatted_animals
         }), 200
 
+    # Error Handlers
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
         response = jsonify(ex.error)
